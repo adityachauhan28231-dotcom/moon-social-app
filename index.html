@@ -1,0 +1,110 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101020">
+<title>MOON Social Messenger</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;background:#101020;color:white;
+ font-family:Arial,sans-serif;
+}
+header{
+ padding:22px;background:#191932;
+ display:flex;justify-content:space-between;
+ align-items:center;
+}
+.logo{font-size:27px;font-weight:bold;color:#9c8cff}
+main{padding:20px;max-width:600px;margin:auto}
+.card{
+ background:#1d1d3b;padding:20px;
+ border-radius:18px;margin:15px 0;
+}
+input{
+ width:100%;padding:15px;border-radius:12px;
+ border:1px solid #555;background:#29294b;
+ color:white;margin:10px 0;
+}
+button{
+ padding:13px 18px;border:0;border-radius:12px;
+ background:#7659ed;color:white;font-weight:bold;
+}
+nav{
+ position:fixed;bottom:0;left:0;right:0;
+ display:flex;justify-content:space-around;
+ background:#191932;padding:15px 5px;
+}
+nav button{padding:12px 8px;font-size:12px}
+.muted{color:#aaa;font-size:13px}
+</style>
+</head>
+<body>
+<header>
+ <div class="logo">🌙 MOON</div>
+ <span>Social Messenger</span>
+</header>
+
+<main>
+ <section class="card" id="welcome">
+  <h2>Welcome to MOON</h2>
+  <p class="muted">Connect with your friends anywhere.</p>
+  <input id="nickname" placeholder="Enter your nickname">
+  <button onclick="enterMoon()">Continue as Guest</button>
+ </section>
+
+ <section id="app" hidden>
+  <h2 id="hello">Hello!</h2>
+  <div class="card">
+   <h3>💬 Chats</h3>
+   <p class="muted">Your conversations will appear here.</p>
+   <p>Real-time messaging setup pending.</p>
+  </div>
+  <div class="card">
+   <h3>📞 Voice Calls</h3>
+   <p class="muted">Internet voice calling setup pending.</p>
+   <p>Audio calls only. No video calls.</p>
+  </div>
+  <div class="card">
+   <h3>📷 Photos & Videos</h3>
+   <p class="muted">Media sharing setup pending.</p>
+  </div>
+  <div class="card">
+   <h3>👤 Profile</h3>
+   <p id="profile"></p>
+  </div>
+ </section>
+</main>
+
+<nav>
+ <button onclick="showTab('Chats')">💬 Chats</button>
+ <button onclick="showTab('Calls')">📞 Calls</button>
+ <button onclick="showTab('Friends')">👥 Friends</button>
+ <button onclick="showTab('Profile')">👤 Profile</button>
+</nav>
+
+<script>
+function enterMoon(){
+ const name=document.getElementById('nickname').value.trim();
+ if(!name){alert('Please enter your nickname');return;}
+ localStorage.setItem('moonNickname',name);
+ document.getElementById('welcome').hidden=true;
+ document.getElementById('app').hidden=false;
+ document.getElementById('hello').textContent='Welcome, '+name+'!';
+ document.getElementById('profile').textContent=name;
+}
+function showTab(tab){
+ alert(tab+' section will be configured next.');
+}
+const saved=localStorage.getItem('moonNickname');
+if(saved){
+ document.getElementById('welcome').hidden=true;
+ document.getElementById('app').hidden=false;
+ document.getElementById('hello').textContent='Welcome, '+saved+'!';
+ document.getElementById('profile').textContent=saved;
+}
+</script>
+</body>
+</html>
